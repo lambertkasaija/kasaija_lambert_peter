@@ -3,80 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flight Booking Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Online Flight Booking Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        /* Header Styling */
+        .header {
+            background-color: #d0021b;
+            padding: 15px;
+            color: white;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            position: relative;
+        }
+        .header img {
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            width: 1200px;
+        }
+        .header h2 {
+            margin: 0;
+        }
+        /* Form Layout Styles */
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .form-section {
+            width: 32%;
+            padding: 15px;
+            border: 1px dashed #ccc;
+        }
+        h3 {
+            text-align: center;
+            color: #d0021b;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="file"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /* Submit Button */
+        .submit-btn {
+            background-color: #d0021b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+        .submit-btn:hover {
+            background-color: #a30016;
+        }
+        .clearfix {
+            clear: both;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Flight Booking Form</h2>
-        
-        <!-- Flash message -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <div class="alert alert-{{ messages[0][0] }}">
-            {{ messages[0][1] }}
-        </div>
-        {% endif %}
-        {% endwith %}
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
 
-        <form action="{{ url_for('submit_booking') }}" method="POST" enctype="multipart/form-data">
-            <!-- Passenger Information -->
-            <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" class="form-control" name="name" id="name" required>
-            </div>
-            <div class="form-group">
-                <label for="gender">Gender</label>
-                <select class="form-control" name="gender" id="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="dob">Date of Birth</label>
-                <input type="date" class="form-control" name="dob" id="dob" required>
-            </div>
-            <div class="form-group">
-                <label for="nationality">Nationality</label>
-                <input type="text" class="form-control" name="nationality" id="nationality" required>
+            <img src="/Refactory-CSE-04-ST-Assessment/images/Brand/Header.PNG">
+        </div>
+
+        <!-- Form Sections in One Row -->
+        <form action="submit_booking" method="POST" enctype="multipart/form-data">
+            <div class="form-container">
+                <!-- Passenger Information Section -->
+                <div class="form-section">
+                    <h3>PASSENGER INFORMATION</h3>
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender *</label>
+                        <select id="gender" name="gender" required>
+                            <option value="">-- Select --</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Nationality *</label>
+                        <input type="text" id="nationality" name="nationality" required>
+                    </div>
+                </div>
+
+                <!-- Contact Information Section -->
+                <div class="form-section">
+                    <h3>CONTACT INFORMATION</h3>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="text" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="po_box">P.O. BOX Number</label>
+                        <input type="text" id="po_box" name="po_box">
+                    </div>
+                    <div class="form-group">
+                        <label for="emergency_contact">Emergency Phone Number *</label>
+                        <input type="text" id="emergency_contact" name="emergency_contact" required>
+                    </div>
+                </div>
+
+                <!-- Flight Information Section -->
+                <div class="form-section">
+                    <h3>FLIGHT INFORMATION</h3>
+                    <div class="form-group">
+                        <label for="passport">Passport Number *</label>
+                        <input type="text" id="passport" name="passport" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="visa">Visa Document *</label>
+                        <input type="file" id="visa" name="visa" accept=".pdf" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="departure_city">Departure City *</label>
+                        <input type="text" id="departure_city" name="departure_city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination City *</label>
+                        <input type="text" id="destination" name="destination" required>
+                    </div>
+                </div>
             </div>
             
-            <!-- Contact Information -->
-            <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="text" class="form-control" name="phone" id="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" class="form-control" name="email" id="email" required>
-            </div>
-            <div class="form-group">
-                <label for="emergency_contact">Emergency Phone Number</label>
-                <input type="text" class="form-control" name="emergency_contact" id="emergency_contact" required>
-            </div>
-            
-            <!-- Flight Information -->
-            <div class="form-group">
-                <label for="passport">Passport Number</label>
-                <input type="text" class="form-control" name="passport" id="passport" required>
-            </div>
-            <div class="form-group">
-                <label for="visa">Visa Document (PDF)</label>
-                <input type="file" class="form-control" name="visa" id="visa" accept=".pdf" required>
-            </div>
-            <div class="form-group">
-                <label for="departure_city">Departure City</label>
-                <input type="text" class="form-control" name="departure_city" id="departure_city" required>
-            </div>
-            <div class="form-group">
-                <label for="destination">Destination City</label>
-                <input type="text" class="form-control" name="destination" id="destination" required>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Submit Booking</button>
+            <!-- Submit Button -->
+            <div class="clearfix"></div>
+            <button type="submit" class="submit-btn">SUBMIT</button>
         </form>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

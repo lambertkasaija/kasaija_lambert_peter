@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash # type: ignore
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Needed for flash messages
